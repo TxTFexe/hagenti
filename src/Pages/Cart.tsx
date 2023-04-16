@@ -1,14 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CartItem, EmptyCart } from "../Components";
-import { RootState } from "../redux/store";
+import { RootState, useAppDispath } from "../redux/store";
+import { clearItems } from "../redux/slices/cartSlice";
 
 const Cart: React.FC = () => {
-  const { totalCount, totalPrice, items } = useSelector((state: RootState) => state.cart);
-  
+  const dispatch = useAppDispath();
+  const { totalCount, totalPrice, items } = useSelector(
+    (state: RootState) => state.cart
+  );
+
   //   if (!totalPrice) {
   //     return <EmptyCart />;
   //   }
+
+  const clearCart = () => {
+    dispatch(clearItems());
+  };
 
   return (
     <div className="container">
@@ -17,6 +25,7 @@ const Cart: React.FC = () => {
           <div className="cart-title">
             <h1>Корзина</h1>
             <div className="cart-item__checkbox"></div>
+            <button onClick={clearCart}>Очистить всё</button>
           </div>
           <div className="cart-items">
             {items.map((item, index: number) => (
@@ -30,7 +39,7 @@ const Cart: React.FC = () => {
             <div className="order-details-item">
               <p>
                 {totalCount}.{" "}
-                {(totalCount > 1) && (totalCount < 5)
+                {totalCount > 1 && totalCount < 5
                   ? "Товара"
                   : totalCount > 4
                   ? "Товаров"
@@ -50,6 +59,6 @@ const Cart: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Cart;

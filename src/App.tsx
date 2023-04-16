@@ -6,7 +6,8 @@ import {
   Develop,
   Configurator,
   ProductPage,
-  Register,
+  UserCabinet,
+  Favorite,
 } from "./Pages";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
@@ -18,15 +19,13 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<Home />} />
           <Route path="/Cart" element={<Cart />} />
-          <Route path="/Category/:categoryName" element={<Category />} />
+          <Route path="/:categoryName" element={<Category />} />
           <Route path="/Test" element={<Test />} />
+          <Route path="/Favorite" element={<Favorite />} />
           <Route path="/Develop" element={<Develop />} />
           <Route path="/Configurator" element={<Configurator />} />
-          <Route
-            path="/Category/:categoryName/:productId"
-            element={<ProductPage />}
-          />
-          <Route path="/Register" element={<Register />} />
+          <Route path="/:categoryName/:productId" element={<ProductPage />} />
+          <Route path="/my-account" element={<UserCabinet />} />
         </Route>
       </Routes>
     </>

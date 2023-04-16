@@ -24,7 +24,7 @@ enum Status{
   ERROR = 'error',
 }
 
-interface PizzaSliceState {
+interface ProductsSliceState {
   items: Product[];
   status: Status;
 }
@@ -40,7 +40,7 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsParams>(
   }
 ); //Buisness logic
 
-const initialState: PizzaSliceState = {
+const initialState: ProductsSliceState = {
   items: [],
   status: Status.LOADING, // loading | sucsess | error
 };

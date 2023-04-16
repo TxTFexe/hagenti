@@ -3,6 +3,7 @@ import cart from "./slices/cartSlice";
 import filter from "./slices/filterSlice";
 import products from "./slices/productsSlice";
 import search from "./slices/searchSlice";
+import favorite from "./slices/favoriteSlice";
 import { useDispatch } from "react-redux";
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     filter,
     products,
     search,
+    favorite,
   },
 });
 

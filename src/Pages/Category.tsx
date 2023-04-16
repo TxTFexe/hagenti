@@ -10,19 +10,20 @@ import { RootState, useAppDispath } from "../redux/store";
 //import qs from "qs";
 
 const Category: React.FC = () => {
-  //const { categoryName } = useParams();
+  const { categoryName } = useParams();
 
   //const navigate = useNavigate();
 
   const dispatch = useAppDispath();
-  const searchValue = useSelector((state: RootState) => state.search.searchValue);
+  const searchValue = useSelector(
+    (state: RootState) => state.search.searchValue
+  );
   const { items, status } = useSelector((state: RootState) => state.products);
   const { sort, currentPage } = useSelector((state: RootState) => state.filter);
 
   //Получение данных из redux
   const getProducts = async () => {
     const sortBy = sort.sortProperty.replace("-", "");
-    console.log(sortBy);
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
 
     dispatch(
@@ -50,7 +51,7 @@ const Category: React.FC = () => {
   //Смена страницы на redux
   const onChangePage = React.useCallback((number: number) => {
     dispatch(setCurrentPage(number));
-  }, [])
+  }, []);
 
   //Отлавливание изменений для данных
   React.useEffect(() => {
@@ -80,9 +81,9 @@ const Category: React.FC = () => {
   return (
     <div className="container">
       <div className="category__header">
-        <h3>Видеокарты</h3>
+        <h3>{categoryName}</h3>
       </div>
-      <Sortings value={sort}/>
+      <Sortings value={sort} />
       <div className="category-grid">
         {/* Сделать фильтры */}
         <Filters />
@@ -95,6 +96,6 @@ const Category: React.FC = () => {
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
-}
+};
 
 export default Category;

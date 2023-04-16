@@ -2,7 +2,7 @@ export { default as Header } from "./Header/Header";
 export { default as Footer } from "./Footer/Footer";
 export { default as Categories } from "./Categories";
 export { default as CartItem } from "./CartItem";
-export { default as Card } from "./Card";
+export { default as Card } from "./Card/Card";
 export { default as Pagination } from "./Pagination";
 export { default as Sortings } from "./Sortings";
 export { default as EmptyCart } from "./EmptyCart";

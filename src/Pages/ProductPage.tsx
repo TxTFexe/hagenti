@@ -6,25 +6,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addItem } from "../redux/slices/cartSlice";
 
 type Product = {
-  id: string,
-  pic: string,
-  type: string,
-  name: string,
-  price: number,
-  count: number
-}
+  id: string;
+  pic: string;
+  type: string;
+  name: string;
+  price: number;
+  count: number;
+};
 
 const ProductPage: React.FC = () => {
   const dispatch = useDispatch();
   const [product, setProduct] = React.useState<Product>();
-  const { productId } = useParams();
+  const { productId, categoryName } = useParams();
   const navigate = useNavigate();
 
   React.useEffect(() => {
     async function fetchProduct() {
       try {
         const { data } = await axios.get(
-          `https://6395a92790ac47c680703bcd.mockapi.io/GPU/${productId}`
+          `https://6395a92790ac47c680703bcd.mockapi.io/${categoryName}/${productId}`
         );
         setProduct(data);
         setSlides([
@@ -40,7 +40,7 @@ const ProductPage: React.FC = () => {
     }
 
     fetchProduct();
-  }, []);
+  }, [productId]);
 
   const onCLickAdd = ({ id, name, price, pic, count, type }: Product) => {
     const item = {
@@ -49,7 +49,7 @@ const ProductPage: React.FC = () => {
       price,
       pic,
       count,
-      type
+      type,
     };
     dispatch(addItem(item));
   };
@@ -87,8 +87,11 @@ const ProductPage: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (slider.current) slider.current.style.transform = `translateX(${currentSlide}px)`;
+    if (slider.current)
+      slider.current.style.transform = `translateX(${currentSlide}px)`;
   }, [currentSlide]);
+
+  window.scrollTo(0, 0);
 
   if (!product) {
     return <></>;
@@ -267,6 +270,6 @@ const ProductPage: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ProductPage;

@@ -19,10 +19,6 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 
     const {id, pic, name, price, count, type} = item;
 
-    //const [checkboxActive, setCheckboxActive] = useState(true);
-
-    //useEffect(() => setCheckboxActive(!checkboxActive), [active])
-
     const onClickIncrementCount = () => {
         dispatch(incrementItemCount(item))
     }
@@ -34,6 +30,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     const onCLickDelete = () => {
         dispatch(removeItem(id))
     }
+
+    //(В будущем) Добавить чекбоксы
 
     return(
     <>
