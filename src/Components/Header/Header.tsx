@@ -7,12 +7,20 @@ import ModalLogin from "../ModalLogin";
 import Search from "./Search/Search";
 import headerStyles from "./Header.module.scss";
 import CartPopup from "./CartPopup";
+import UserPopup from "./UserPopup";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Header: React.FC = () => {
   const [authVisible, setAuthVisible] = useState(false);
   const [showCartPopup, setShowCartPopup] = useState(false);
+  const [showUserPopup, setShowUserPopup] = useState(false);
+  const { totalCount, items, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
 
   const toggleAuthVisible = () => {
+    setShowUserPopup(false);
     setAuthVisible((prev) => !prev);
   };
 
@@ -28,13 +36,23 @@ const Header: React.FC = () => {
           </Link>
           <Search />
           <ul className={headerStyles.nav__list}>
-            <li>
-              <a className={headerStyles.nav__item} onClick={toggleAuthVisible}>
+            <li
+              onMouseEnter={() => setShowUserPopup(true)}
+              onMouseLeave={() => setShowUserPopup(false)}
+            >
+              <Link
+                to={"/"}
+                className={headerStyles.nav__item}
+                onClick={toggleAuthVisible}
+              >
                 <FiUser />
                 {authVisible && <ModalLogin onClose={toggleAuthVisible} />}
                 {/*Создать способ вытягивания имени активного пользователя*/}
                 Вадим
-              </a>
+              </Link>
+              <div className={showUserPopup ? "opacity_1" : "opacity_0"}>
+                <UserPopup />
+              </div>
             </li>
             <li>
               <Link to={"/Favorite"} className={headerStyles.nav__item}>
@@ -46,13 +64,19 @@ const Header: React.FC = () => {
               onMouseEnter={() => setShowCartPopup(true)}
               onMouseLeave={() => setShowCartPopup(false)}
             >
-              <NavItemCount />
+              <NavItemCount props={[items, totalCount]} />
               <Link to={"/Cart"} className={headerStyles.nav__item}>
                 <FiShoppingCart className="nav-item-icon" />
                 Корзина
               </Link>
               <div className={showCartPopup ? "opacity_1" : "opacity_0"}>
-                <CartPopup />
+                {totalCount > 0 && (
+                  <CartPopup
+                    cartItems={items}
+                    cartTotalPrice={totalPrice}
+                    cartTotalCount={totalCount}
+                  />
+                )}
               </div>
             </li>
           </ul>

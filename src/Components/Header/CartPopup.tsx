@@ -1,22 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import headerStyles from "./Header.module.scss";
+import { CartItem } from "../../redux/slices/cartSlice";
 
-export default function CartPopup() {
-  const { totalCount, items, totalPrice } = useSelector(
-    (state: RootState) => state.cart
-  );
+type CartPopupProps = {
+  cartTotalPrice: number;
+  cartTotalCount: number;
+  cartItems: CartItem[];
+};
 
+const CartPopup: React.FC<CartPopupProps> = ({
+  cartTotalPrice,
+  cartTotalCount,
+  cartItems,
+}) => {
   return (
     <div className={headerStyles.cart__popup}>
       <div className={headerStyles.cart__popup__title}>
-        <span>{totalCount}. Товар</span>
-        <span>{totalPrice.toLocaleString()}₽</span>
+        <span>{cartTotalCount}. Товар</span>
+        <span>{cartTotalPrice.toLocaleString()}₽</span>
       </div>
       <div className={headerStyles.cart__popup__items}>
-        {items.map((item) => (
-          <div className={headerStyles.cart__popup__item}>
+        {cartItems.map((item: CartItem, index) => (
+          <div key={index} className={headerStyles.cart__popup__item}>
             <span>{item.name}</span>
             <div>
               <span>{item.price.toLocaleString()}₽</span>
@@ -27,4 +32,6 @@ export default function CartPopup() {
       </div>
     </div>
   );
-}
+};
+
+export default CartPopup;

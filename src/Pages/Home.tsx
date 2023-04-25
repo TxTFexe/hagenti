@@ -25,7 +25,6 @@ const mainBlockAnimation = {
 const Home: React.FC = () => {
   const [width, setWidth] = useState(0);
   const carousel = useRef<HTMLInputElement | null>(null);
-  const [categories, setCategories] = useState(false);
 
   const settings = {
     dots: true,
@@ -44,15 +43,15 @@ const Home: React.FC = () => {
   }, []);
 
   const categoriesAndURL = [
-    { name: "Видеокарты", url: "GPU" },
-    { name: "Процессоры", url: "CPU" },
-    { name: "Материнские платы", url: "Motherboards" },
-    { name: "Оперативная память", url: "RAM" },
-    { name: "Блоки питания", url: "PSU" },
-    { name: "Охлаждение", url: "Cooling" },
-    { name: "HDD", url: "HDD" },
-    { name: "SSD", url: "SDD" },
-    { name: "Корпуса", url: "Cases" },
+    { name: "Видеокарты", url: "gpu" },
+    { name: "Процессоры", url: "cpu" },
+    { name: "Материнские платы", url: "motherboards" },
+    { name: "Оперативная память", url: "ram" },
+    { name: "Блоки питания", url: "psu" },
+    { name: "Охлаждение", url: "cooling" },
+    { name: "HDD", url: "hdd" },
+    { name: "SSD", url: "ssd" },
+    { name: "Корпуса", url: "cases" },
   ];
 
   const data = [
@@ -119,14 +118,8 @@ const Home: React.FC = () => {
         >
           <div className="category-menu-header">
             <h1>Каталог</h1>
-            <a
-              className={categories ? "menu-btn" : "menu-btn menu-btn_active"}
-              onClick={() => setCategories(!categories)}
-            >
-              <span></span>
-            </a>
           </div>
-          <div className={categories ? "wrapper hide" : "wrapper"}>
+          <div className="wrapper">
             <Categories items={categoriesAndURL} />
           </div>
         </motion.div>
@@ -160,7 +153,7 @@ const Home: React.FC = () => {
                 <img src={item.image} />
                 <div className="category-content__buy__block">
                   <p>{Number(item.price).toLocaleString()}₽</p>
-                  <a className="category-content__item__button">Купить</a>
+                  <a className="category-content__item__button">В корзину</a>
                 </div>
               </div>
             ))}

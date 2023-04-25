@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({ id, pic, name, price, count, type }) => {
         }}
         className={cardStyles.category_content__item__image}
       >
-        <Link to={"/Category/GPU" + "/" + id}>
+        <Link to={"/gpu" + "/" + id}>
           <img src={slides[currentShowImage]} alt={name} draggable="false" />
           <div className={cardStyles.category_content__item__picture__overlay}>
             {[...new Array(4)].map((_, index) => (
@@ -78,6 +78,7 @@ const Card: React.FC<CardProps> = ({ id, pic, name, price, count, type }) => {
           <div className="dot__container">
             {[...new Array(4)].map((_, index) => (
               <span
+                key={index}
                 className={
                   currentShowImage === index ? "dot dot__active" : "dot"
                 }
@@ -88,7 +89,9 @@ const Card: React.FC<CardProps> = ({ id, pic, name, price, count, type }) => {
       </div>
       <div className="category-content__title_and_description">
         <div className={cardStyles.category_content__title}>
-          <Link to={"/GPU" + "/" + id}>{name}</Link>
+          <Link to={"/gpu" + "/" + id} title={name}>
+            {name}
+          </Link>
           {onFavorite ? (
             <AiFillHeart
               className={cardStyles.heart__icon__active}

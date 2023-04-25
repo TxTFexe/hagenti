@@ -8,15 +8,17 @@ import { setSearch } from "../../../redux/slices/searchSlice";
 import { RootState } from "../../../redux/store";
 import { Link } from "react-router-dom";
 
-const Search: React.FC = () => {
+const Search: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const searchValue = useSelector(
     (state: RootState) => state.search.searchValue
   );
   const [value, setValue] = React.useState("");
-  const [suggestions, setShowSuggestions] = React.useState(false);
+  const [suggestions, setSuggestions] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const searchRef = React.useRef<HTMLDivElement>(null);
+
+  console.log(suggestions);
 
   const onClickClear = () => {
     dispatch(setSearch(""));
@@ -39,9 +41,9 @@ const Search: React.FC = () => {
   React.useEffect(() => {
     document.body.addEventListener("click", (e: any) => {
       if (!e.composedPath().includes(searchRef.current)) {
-        setShowSuggestions(false);
+        setSuggestions(false);
       } else {
-        setShowSuggestions(true);
+        setSuggestions(true);
       }
     });
   }, []);
@@ -72,7 +74,7 @@ const Search: React.FC = () => {
           </button>
         </form>
       </div>
-      {value && suggestions && (
+      {suggestions && value && (
         <div className={searchStyles.suggestions__container}>
           <div className={searchStyles.suggestions}>
             <Link to={"/GPU/1"}>GIGABYTE AORUS GeForce RTX 3080</Link>
@@ -84,5 +86,5 @@ const Search: React.FC = () => {
       )}
     </div>
   );
-};
+});
 export default Search;

@@ -3,7 +3,7 @@
 @font-face {
   font-family: "SF Pro Text";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-display: swap;
 
   /* Браузер сначала попробует найти шрифт локально */
@@ -123,7 +123,7 @@ main {
   padding: 0 5px;
   text-align: center;
   font-weight: 500;
-  margin: -6px -7px 0 25px;
+  margin: -6px 0 0 27px;
   color: var(--bg-color-dark);
   pointer-events: none;
 }
@@ -706,51 +706,51 @@ details > summary {
   margin-top: 5px;
 }
 
-.menu-btn {
-  transform: scale(0);
-  width: 30px;
-  height: 30px;
-  border-radius: 5px;
-  position: relative;
-  margin-top: 5px;
-}
-.menu-btn span,
-.menu-btn span::before,
-.menu-btn span::after {
-  position: absolute;
-  top: 50%;
-  margin-top: -1px;
-  left: 50%;
-  margin-left: -10px;
-  width: 20px;
-  height: 2px;
-  background-color: var(--main-grey-color);
-}
-.menu-btn span::before,
-.menu-btn span::after {
-  content: "";
-  display: block;
-  transition: 0.2s;
-}
-.menu-btn span::before {
-  transform: translateY(-6px);
-}
-.menu-btn span::after {
-  transform: translateY(6px);
-}
+// .menu-btn {
+//   transform: scale(0);
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 5px;
+//   position: relative;
+//   margin-top: 5px;
+// }
+// .menu-btn span,
+// .menu-btn span::before,
+// .menu-btn span::after {
+//   position: absolute;
+//   top: 50%;
+//   margin-top: -1px;
+//   left: 50%;
+//   margin-left: -10px;
+//   width: 20px;
+//   height: 2px;
+//   background-color: var(--main-grey-color);
+// }
+// .menu-btn span::before,
+// .menu-btn span::after {
+//   content: "";
+//   display: block;
+//   transition: 0.2s;
+// }
+// .menu-btn span::before {
+//   transform: translateY(-6px);
+// }
+// .menu-btn span::after {
+//   transform: translateY(6px);
+// }
 
-.menu-btn_active span {
-  background-color: transparent;
-}
+// .menu-btn_active span {
+//   background-color: transparent;
+// }
 
-.menu-btn_active span:before {
-  transform: rotate(-45deg);
-  width: 20px;
-}
-.menu-btn_active span:after {
-  transform: rotate(45deg);
-  width: 20px;
-}
+// .menu-btn_active span:before {
+//   transform: rotate(-45deg);
+//   width: 20px;
+// }
+// .menu-btn_active span:after {
+//   transform: rotate(45deg);
+//   width: 20px;
+// }
 
 .image_display {
   overflow: hidden;
@@ -1092,15 +1092,36 @@ details > summary {
   background: #212529;
   border: solid #262a2e 1px;
   border-radius: 15px;
-  height: 320px;
   min-width: 210px;
   padding: 30px;
   text-align: center;
   font-size: 18px;
   margin-bottom: 26px;
+  position: relative;
   transition: 0.2s;
+  svg {
+    right: 30px;
+    color: red;
+    position: absolute;
+  }
+  svg:hover {
+    cursor: pointer;
+  }
+  span {
+    color: var(--main-grey-color);
+  }
   img {
     width: 180px;
+    height: 180px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  button {
+    color: var(--block-bg-color);
+    background-color: var(--corporate-green);
+    border-radius: 10px;
+    height: 45px;
+    width: 150px;
   }
 }
 
@@ -1122,6 +1143,26 @@ details > summary {
   margin-bottom: 26px;
   margin-left: 20px;
   color: var(--corporate-green);
+}
+
+.product__feedback {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  button {
+    color: var(--main-grey-color);
+    font-size: 18px;
+  }
+  &__item {
+    width: 100%;
+    background-color: var(--block-bg-color);
+    border: var(--block-border-color) solid 1px;
+    height: 120px;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 20px;
+  }
 }
 
 @media (min-width: 976px) and (max-width: 1228px) {
@@ -1159,14 +1200,15 @@ details > summary {
     height: 240px;
     width: 100%;
   }
-  .mainpage-category-menu {
-    margin-bottom: 30px;
-  }
   .menu-btn {
     transform: scale(1);
   }
-  .nav-item-icon {
-    margin-right: 0;
+  .wrapper {
+    overflow: auto;
+    height: 60px;
+    a {
+      margin-right: 15px;
+    }
   }
   .nav-item-count {
     margin: -6px -7px 0px 10px;
@@ -1199,5 +1241,42 @@ details > summary {
         display: none;
       }
     }
+  }
+  //favorite
+  .favorite-grid {
+    grid-template-columns: auto;
+  }
+  //Product page
+  .product_grid {
+    display: block;
+    grid-template-columns: auto;
+    height: auto;
+  }
+  .image_block {
+    margin: 0;
+    margin-top: 26px;
+    width: auto;
+    height: auto;
+  }
+  .price_block_bg {
+    height: 400px;
+  }
+  .product_page__button {
+    width: 100%;
+  }
+  .specs {
+    width: 100%;
+  }
+  .price-n-functions {
+    h4,
+    span {
+      display: none;
+    }
+  }
+  .image_display {
+    height: auto;
+  }
+  .image_showcase {
+    height: auto;
   }
 }

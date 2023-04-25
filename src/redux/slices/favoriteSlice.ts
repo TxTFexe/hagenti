@@ -17,11 +17,9 @@ interface FavoriteSliceState {
     items: FavoriteItem[];
 }
 
-const { items, totalCount } = getCartFromLS();
-
 const initialState: FavoriteSliceState = {
-    totalCount,
-    items,
+    totalCount: 0,
+    items: [],
 };
 
 const favoriteSlice = createSlice({
@@ -33,9 +31,9 @@ const favoriteSlice = createSlice({
 
             if (findItem) {
                 return
-            } else{
+            } else {
                 state.items.push({
-                    ...action.payload, 
+                    ...action.payload,
                     count: 1,
                 });
             }

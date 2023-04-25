@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -17,6 +17,7 @@ type Product = {
 const ProductPage: React.FC = () => {
   const dispatch = useDispatch();
   const [product, setProduct] = React.useState<Product>();
+  const [showReviews, setShowReviews] = useState(5);
   const { productId, categoryName } = useParams();
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const ProductPage: React.FC = () => {
     async function fetchProduct() {
       try {
         const { data } = await axios.get(
-          `https://6395a92790ac47c680703bcd.mockapi.io/${categoryName}/${productId}`
+          `https://6395a92790ac47c680703bcd.mockapi.io/${categoryName?.toUpperCase()}/${productId}`
         );
         setProduct(data);
         setSlides([
@@ -41,6 +42,10 @@ const ProductPage: React.FC = () => {
 
     fetchProduct();
   }, [productId]);
+
+  // React.useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   const onCLickAdd = ({ id, name, price, pic, count, type }: Product) => {
     const item = {
@@ -91,8 +96,6 @@ const ProductPage: React.FC = () => {
       slider.current.style.transform = `translateX(${currentSlide}px)`;
   }, [currentSlide]);
 
-  window.scrollTo(0, 0);
-
   if (!product) {
     return <></>;
   }
@@ -104,8 +107,8 @@ const ProductPage: React.FC = () => {
           <div className="product_images">
             <div className="image_display">
               <div ref={slider} className="image_showcase">
-                {slides.map((slide) => {
-                  return <img src={slide}></img>;
+                {slides.map((slide, i) => {
+                  return <img src={slide} key={i}></img>;
                 })}
                 {/* <img src={product.pic}></img>
                 <img src="https://static.gigabyte.com/StaticFile/Image/Global/303d4516244d408a66af70a74dfb8fe6/Product/26165"></img>
@@ -249,24 +252,36 @@ const ProductPage: React.FC = () => {
             </p>
           ))}
         </div>
-        <div className="product__specs__bg">
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-          <span>Характеристика: значение</span>
-        </div>
+        {currentSection === 0 && (
+          <div className="product__specs__bg">
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+            <span>Характеристика: значение</span>
+          </div>
+        )}
+        {currentSection === 1 && (
+          <div className="product__feedback">
+            {[...new Array(showReviews)].map((_, index) => (
+              <div className="product__feedback__item">1</div>
+            ))}
+            <button onClick={() => setShowReviews((prev) => prev + 5)}>
+              Показать ещё
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

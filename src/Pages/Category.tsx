@@ -81,7 +81,7 @@ const Category: React.FC = () => {
   return (
     <div className="container">
       <div className="category__header">
-        <h3>{categoryName}</h3>
+        <h3>{categoryName?.toUpperCase()}</h3>
       </div>
       <Sortings value={sort} />
       <div className="category-grid">

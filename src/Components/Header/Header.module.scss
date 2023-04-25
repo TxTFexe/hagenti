@@ -89,7 +89,33 @@ header {
   }
 }
 
-@media (max-width: 412px) {
+.user__popup {
+  position: absolute;
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  background-color: var(--block-border-color);
+  max-height: 250px;
+  width: 260px;
+  right: calc(100% - 150px);
+  margin-top: 7px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--main-grey-color);
+    margin: 1em 0;
+    padding: 0;
+  }
+  a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
   .header__nav {
     display: grid;
     row-gap: 15px;
@@ -105,8 +131,8 @@ header {
   .nav__list {
     opacity: 1;
     position: absolute;
-    top: 30px;
-    left: 200px;
+    top: 25px;
+    right: 35px;
     .nav__item {
       font-size: 0px;
     }
